@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maple</title>
+    <script src="jquery-3.4.1/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+<div style="text-align: center;">
+    <input id="input" type="number"><button id="go">go</button>
+    <div id="answer"></div>
+</div>
+<script>
+    let answer = 0;
+    function search(){
+        let vis = [], queue = [], parent = [];
+        queue.push(0);
+        vis[0] = true;
+        while(queue.length > 0){
+            let qTop = queue.shift();
+            for (let calc = 0; calc < 4; calc++){
+                for (let num = 1; num <= 4; num++){
+                    let nextNum = qTop + num;
+                    let currentCalc = "+";
+                    switch (calc) {
+                        case 0:
+                            nextNum = qTop + num;
+                            currentCalc = "+";
+                            break;
+                        case 1:
+                            nextNum = qTop - num;
+                            currentCalc = "-";
+                            break;
+                        case 2:
+                            nextNum = qTop * num;
+                            currentCalc = "*";
+                            break;
+                        case 3:
+                            nextNum = parseInt(qTop / num);
+                            currentCalc = "/";
+                            break;
+                    }
+                    if (nextNum > 0 && !vis[nextNum]){
+                        vis[nextNum] = true;
+                        parent[nextNum] = [];
+                        parent[nextNum][0] = currentCalc;
+                        parent[nextNum][1] = num;
+                        parent[nextNum][2] = qTop;
+                        if (nextNum === answer){
+                            return parent;
+                        }
+                        queue.push(nextNum);
+                    }
+
+                }
+            }
+        }
+    }
+    $("#go").on('click', function () {
+        answer = parseInt($("#input").val());
+        let parent = search(), stack = [];
+        let currentNum = answer;
+        while (currentNum !== 0){
+            stack.push(parent[currentNum][0] + parent[currentNum][1] + " ");
+            currentNum = parent[currentNum][2];
+        }
+        let output = "";
+        while (stack.length > 0){
+            output += stack.pop();
+        }
+        $("#answer").text(output);
+    });
+</script>
+</body>
+</html>
