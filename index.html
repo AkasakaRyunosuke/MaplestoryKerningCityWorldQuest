@@ -9,6 +9,7 @@
 <div style="text-align: center;">
     <input id="input" type="number"><button id="go">go</button>
     <div id="answer"></div>
+    <div id="answer_cnt"></div>
 </div>
 <script>
     let answer = 0;
@@ -60,7 +61,19 @@
         answer = parseInt($("#input").val());
         let parent = search(), stack = [];
         let currentNum = answer;
+        let cnt = 0, vis = [];
+        for (let i = 1; i <= 4; i++){
+            vis[i] = true;
+        }
         while (currentNum !== 0){
+            let tmp = parent[currentNum][1];
+            if (vis[tmp]){
+                cnt++;
+                for (let i = 1; i <= 4; i++){
+                    vis[i] = false;
+                }
+            }
+            vis[tmp] = true;
             stack.push(parent[currentNum][0] + parent[currentNum][1] + " ");
             currentNum = parent[currentNum][2];
         }
@@ -69,6 +82,7 @@
             output += stack.pop();
         }
         $("#answer").text(output);
+        $("#answer_cnt").text(cnt);
     });
 </script>
 </body>
