@@ -19,7 +19,7 @@
         vis[0] = true;
         while(queue.length > 0){
             let qTop = queue.shift();
-            for (let calc = 0; calc < 4; calc++){
+            for (let calc = 0; calc < 3; calc++){
                 for (let num = 1; num <= 4; num++){
                     let nextNum = qTop + num;
                     let currentCalc = "+";
@@ -36,10 +36,10 @@
                             nextNum = qTop * num;
                             currentCalc = "*";
                             break;
-                        case 3:
-                            nextNum = parseInt(qTop / num);
-                            currentCalc = "/";
-                            break;
+                        // case 3:
+                        //     nextNum = parseInt(qTop / num);
+                        //     currentCalc = "/";
+                        //     break;
                     }
                     if (nextNum > 0 && !vis[nextNum]){
                         vis[nextNum] = true;
