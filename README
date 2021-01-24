@@ -1,1 +1,21 @@
+This project is for doing calculation in Kerning City World Quest of [MapleStor](https://maplestory.nexon.net/).
+Usage：
+visit [gitpage for this project](https://akasakaryunosuke.github.io/MaplestoryKerningCityWorldQuest/)
+input a number and click go
+then will show you the answer for the Quest.
+For example
+Input:
+123
+Answer:
++1 +4 *2 *3 *4 +3
+2
 
+mean that
+0+1=1
+1+4=5
+5*2=10
+10*3=30
+30*4=120
+120+3=123
+
+You have to kill at least 2 monsters to get the number to finish the calculation.
